@@ -5,6 +5,7 @@ import {
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import axios from "./api/axios";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -53,7 +54,7 @@ function Register() {
     setErrMsg("");
   }, [user, pwd, matchPwd]);
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     // if button enabled with JS hack
     const v1 = USER_REGEX.test(user);
@@ -64,6 +65,29 @@ function Register() {
     }
     console.log(user, pwd);
     setSuccess(true);
+    // try {
+    //   const res = await axios.post(
+    //     REGISTER_URL,
+    //     JSON.stringify({ user, pwd }),
+    //     {
+    //         headers: { "Content-Type": "application/json" },
+    //         withCredentials: true
+    //     }
+    //   );
+    //     console.log(res.date);
+    //     console.log(res.accessToken);
+    //     console.log(JSON.stringify(res));
+    //     setSuccess(true);
+    // } catch (err) {
+    //     if (!err?.res) {
+    //         setErrMsg('No Server Response')
+    //     } else if (err.res?.status === 409) {
+    //         setErrMsg("Username Taken");
+    //     } else {
+    //         setErrMsg("Registration Failed");
+    //     }
+    //     errRef.current.focus();
+    // }
   };
 
   return (
@@ -72,11 +96,11 @@ function Register() {
         <section>
           <h1>Success!</h1>
           <p>
-            <a href="#">Sign In</a>
+            <a href="http://localhost:3000">Sign In</a>
           </p>
         </section>
       ) : (
-        <section >
+        <section>
           <p
             ref={errRef}
             className={errMsg ? "errmsg" : "offscreen"}
@@ -208,7 +232,7 @@ function Register() {
             <br />
             <span className="line">
               {/*put router link here*/}
-              <a href="#">Sign In</a>
+              <a href="http://localhost:3000">Sign In</a>
             </span>
           </p>
         </section>
