@@ -1,10 +1,11 @@
-import './App.css';
+import Register from './Register';
+
 
 function App() {
   return (
-    <div>
-
-    </div>
+    <main className="App">
+      <Register />
+    </main>
   );
 }
 
